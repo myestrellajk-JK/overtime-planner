@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>휴일 특근 계획 관리 페이지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="date"],
+        input[type="time"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>휴일 특근 계획 관리</h1>
+    
+    <form id="overtimeForm">
+        <label for="name">이름:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="date">특근일:</label>
+        <input type="date" id="date" name="date" required>
+        
+        <label for="startTime">근무 시작 시간:</label>
+        <input type="time" id="startTime" name="startTime" required>
+        
+        <label for="endTime">근무 종료 시간:</label>
+        <input type="time" id="endTime" name="endTime" required>
+        
+        <label for="method">특근 처리 방법:</label>
+        <select id="method" name="method" required>
+            <option value="특근">특근</option>
+            <option value="대체휴가">대체휴가</option>
+        </select>
+        
+        <button type="submit">등록</button>
+    </form>
+    
+    <table id="overtimeTable">
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th>특근일</th>
+                <th>근무 시작 시간</th>
+                <th>근무 종료 시간</th>
+                <th>특근 처리 방법</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 등록된 데이터가 여기에 추가됩니다 -->
+        </tbody>
+    </table>
+
+    <script>
+        const form = document.getElementById('overtimeForm');
+        const tableBody = document.getElementById('overtimeTable').querySelector('tbody');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const date = document.getElementById('date').value;
+            const startTime = document.getElementById('startTime').value;
+            const endTime = document.getElementById('endTime').value;
+            const method = document.getElementById('method').value;
+            
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${name}</td>
+                <td>${date}</td>
+                <td>${startTime}</td>
+                <td>${endTime}</td>
+                <td>${method}</td>
+            `;
+            
+            tableBody.appendChild(newRow);
+            
+            form.reset();
+        });
+    </script>
+</body>
+</html>
